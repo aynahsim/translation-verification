@@ -1,0 +1,13 @@
+import runtime;
+import string;
+
+main() {
+    intArray : [int] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+    stringArray : [string] = map(intArray, i2s);
+    glued : string = strGlue(stringArray, ", ");
+
+    println(glued);
+
+    quit(0);
+}

@@ -1,0 +1,50 @@
+import runtime;
+import ds/tree;
+
+inds(array: [int], m: int) -> [Pair<int, int>] {
+    refArray : ref [Pair<int, int>] = ref [];
+
+    fori(
+        0,
+        length(array) - 1,
+        \i -> fori(
+            0,
+            length(array) - 1,
+            \j -> if (array[i] + array[j] == m) {
+                refArrayPush(refArray, Pair(i, j))
+            }
+        )
+    );
+
+    ^refArray;
+}
+
+indsTree(array: [int], m: int) -> [Pair<int, int>] {
+    resultTree : Tree = foldi(
+        array,
+        makeTree(),
+        \i,
+        tree,
+        a -> treePushToArrayValue(tree, a, i)
+    );
+
+    foldi(
+        array,
+        [],
+        \i,
+        result,
+        a -> switch(lookupTree(resultTree, m - a)) {
+            Some(value): concat(result, map(value, \j -> Pair(i, j)));
+            None(): concat(result, []);
+        }
+    );
+}
+
+main() {
+    array: [int] = [2, 0, 3, 4, 1, 5, 7, 85, -2, 90, 2, 3];
+
+    println(inds(array, 6));
+    println(indsTree(array, 6));
+
+    quit(0);
+}

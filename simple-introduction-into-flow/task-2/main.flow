@@ -1,0 +1,12 @@
+import runtime;
+
+sum(intArray : [int]) -> int {
+    fold(intArray, 0, \x, y -> x + y);
+}
+
+main() {
+    intArray : [int] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    println(sum(intArray));
+
+    quit(0);
+}
